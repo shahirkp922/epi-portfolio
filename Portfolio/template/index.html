@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>Content</h1>
+
+    {% if language == "en" %}
+        <h2>English Content</h2>
+        {% for item in contentE %}
+            <div class="content-item">
+                <h2>{{ item.title }}</h2>
+                <p>{{ item.description }}</p>
+                
+                {% if item.video %}
+                    <video controls>
+                        <source src="{{ item.video.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                {% endif %}
+
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="{{ item.title }} image">
+                {% endif %}
+            </div>
+            <hr>
+        {% empty %}
+            <p>No English content available.</p>
+        {% endfor %}
+    {% else %}
+        <h2>Malayalam Content</h2>
+        {% for item in contentM %}
+            <div class="content-item">
+                <h2>{{ item.title }}</h2>
+                <p>{{ item.description }}</p>
+                
+                {% if item.video %}
+                    <video controls>
+                        <source src="{{ item.video.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                {% endif %}
+
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="{{ item.title }} image">
+                {% endif %}
+            </div>
+            <hr>
+        {% empty %}
+            <p>No Malayalam content available.</p>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
